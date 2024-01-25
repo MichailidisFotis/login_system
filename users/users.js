@@ -18,8 +18,29 @@ router.post("/signup", jsonParser, async (req, res) => {
   var surname = req.body.surname;
 
 
+  //*check if two passwords match
+  if (user_password !==verify_password){
+    res.status(400).send({message:"Passwords must match"})
+    return
+  }
 
-
+  var user =  await new Promise((resolve, reject) => {
+    db.all(`
+      SELECT * FROM USERS WHERE username = ?
+    ` , username ,  (err , rows)=>{
+        if(err)
+          reject(err)
+        else  
+          resolve(rows)
+    })
+  })
+  
+  //*check if username is taken
+  if(user.length>0)
+  {
+    res.status(400).send({message:"Username already taken"})
+    return
+  }
 
 
   db.run(
@@ -32,7 +53,7 @@ router.post("/signup", jsonParser, async (req, res) => {
         });
       } else {
         res.status(201).send({
-          message: "User created",
+          message: "User created"
         });
       }
     }
@@ -43,6 +64,8 @@ router.post("/login", jsonParser, async (req, res) => {
   var username = req.body.username;
   var password = req.body.password;
 
+
+  //* check if username exists in database
   var user = await new Promise((resolve, reject) => {
     db.all(`SELECT * FROM USERS WHERE username=?`, username, (err, rows) => {
       if (err) reject(err);
@@ -54,6 +77,8 @@ router.post("/login", jsonParser, async (req, res) => {
     res.status(400).send({ message: "Username not found" });
     return;
   }
+
+  //*check if the password is correct
   var autheticate_user = await new Promise((resolve, reject) => {
     db.all(
       ` SELECT * FROM USERS WHERE username =? AND user_password=?
@@ -66,6 +91,7 @@ router.post("/login", jsonParser, async (req, res) => {
     );
   });
 
+  //*send answer if password is incorrect
   if (autheticate_user == 0) {
     res.status(400).send({ message: "Please check your password" });
     return;
