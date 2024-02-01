@@ -1,0 +1,258 @@
+
+
+@media (max-width: 992px) {
+    .navbar .navbar-nav {
+      display: inline-block;
+      float: none;
+      vertical-align: top;
+    }
+
+    .navbar .navbar-collapse {
+      text-align: center;
+    }
+  }
+
+
+  nav{
+    box-shadow: 3px 0px 0px ,0 4px 20px 0;
+  }
+
+
+
+
+  #userForm{
+    display: flex;
+    justify-content: center;
+  }
+  
+
+#loginForm{
+    display: flex;
+    width: 40%;
+    height: 400px;
+    margin-top: 1%;
+    background-color: rgb(48, 48, 48);
+    border-radius: 1rem;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 40px;
+    border: 2px solid rgb(58, 58, 58) ;
+    box-shadow: 5px 5px 5px ,0 6px 20px 0;
+
+  
+  }
+  
+  @media only screen and (max-width: 1000px){
+    
+      #loginForm{
+        width: 80%;
+      }
+  }
+
+  
+  #loginForm p{
+    font-family: 'Courier New', Courier, monospace;
+    color: rgb(255,255, 255);
+    font-size: 30px;
+  }
+  
+  
+  #loginForm input{
+   
+    height: 40px;
+    width: 50%;
+
+    background-color: rgb(48, 48, 48);
+
+    border: 2px solid rgb(97, 96, 96);
+    border-radius: 1rem;
+    text-align: center;
+
+    color:rgb(255, 255, 255); 
+    font-size: large;
+    outline: none;
+    transition: 0.30s;
+
+  }
+  
+  
+  #loginForm button{
+
+    height: 50px;
+    width: 120px;
+    background-color: rgb(68, 65, 65);
+    
+    border: 2px solid rgb(96, 96, 96);
+    border-radius: 1rem;
+    color: whitesmoke;
+
+    
+
+    transition: 0.30s;
+  }
+  
+  ::placeholder{
+    color: rgb(255, 255, 255);
+  }
+  
+  
+  #loginForm button:hover{
+    width: 235.2px;
+   /* border-color: rgb(48, 48, 48); */
+  }
+  
+  #loginForm input:focus{
+    width: 300px;
+    /* border-color: rgb(48, 48, 48); */
+    background-color: whitesmoke;
+    color: black;
+
+  }
+  
+  
+  #loginForm input:hover{
+    width: 55%;
+    /* border-color: rgb(48, 48, 48); */
+    
+  }
+  
+  
+  #loginForm input:focus::placeholder{
+    color: transparent;
+  }
+
+
+
+  #message{
+
+    text-align: center;
+    height: 40px;
+    justify-content: center;
+}
+
+#message h1{
+    font-size: 20px;
+    padding: 1%;
+
+}
+
+
+#registerForm{
+  display: flex;
+  width: 40%;
+  height: 550px;
+  margin-top: 1%;
+  background-color: rgb(48, 48, 48);
+  
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 40px;
+  border: 2px solid rgb(58, 58, 58) ;
+  box-shadow: 5px 5px 5px ,0 6px 20px 0;
+  gap: 30px;
+ 
+
+}
+
+@media only screen and (max-width: 1000px){
+  
+    #registerForm{
+      width: 80%;
+    }
+}
+
+
+@media only screen and (max-width: 680px){
+  
+
+  #registerForm #label{
+    font-size: 20px;
+  }
+
+
+}
+
+@media only screen and (max-width: 380px){
+  
+  .navbar-brand{
+    font-size:15px;
+  } 
+ 
+
+
+}
+
+
+
+
+#registerForm p{
+  font-family: 'Courier New', Courier, monospace;
+  color: rgb(255,255, 255);
+  font-size: 30px;
+  margin-top: 15px;
+}
+
+
+#registerForm input{
+ 
+  height: 40px;
+  width: 60%;
+  background-color: rgb(48, 48, 48);
+  /*background: none; */
+  border: 2px solid rgb(97, 96, 96);
+
+  text-align: center;
+  /* font-family: 'Courier New', Courier, monospace; */
+  color:rgb(255, 255, 255); 
+  font-size: large;
+  outline: none;
+  transition: 0.30s;
+}
+
+#registerForm label{
+  color: white;
+}
+
+#registerForm button{ 
+  height: 50px;
+  width: 100%;
+  background-color: #0d6efd;
+  border: 2px solid #0d6efd;
+  bottom: 0;
+  margin-bottom: 0px;
+  color: whitesmoke;
+  transition: 0.30s;
+}
+
+::placeholder{
+  color: rgb(255, 255, 255);
+}
+
+
+#registerForm button:hover{
+  
+   background-color: #277af7 ;
+   border: 2px solid #277af7;
+}
+
+#registerForm input:focus{
+  width: 70%;
+  /* border-color: rgb(48, 48, 48); */
+  background-color: whitesmoke;
+  color: black;
+
+}
+
+
+#registerForm input:hover{
+  width: 70%;
+  /* border-color: rgb(48, 48, 48); */
+  
+}
+
+
+#registerForm input:focus::placeholder{
+  color: transparent;
+}

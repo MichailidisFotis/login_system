@@ -3,10 +3,21 @@ import bodyParser from "body-parser";
 import db from "../database.js";
 import md5 from "md5";
 import { v4 as uuidv4 } from "uuid";
+import requireLogin from "../middlewares/requireLogin.js";
+import { fileURLToPath } from 'url';
+import {dirname} from "path"
+
 
 var jsonParser = bodyParser.json();
 
+
+
 const router = express.Router();
+
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 
 //*register user
 router.post("/signup", jsonParser, async (req, res) => {
@@ -20,7 +31,9 @@ router.post("/signup", jsonParser, async (req, res) => {
 
   //*check if two passwords match
   if (user_password !==verify_password){
-    res.status(400).send({message:"Passwords must match"})
+    res.status(400).send({
+      message:"Passwords must match",
+      signup:false})
     return
   }
 
@@ -38,13 +51,14 @@ router.post("/signup", jsonParser, async (req, res) => {
   //*check if username is taken
   if(user.length>0)
   {
-    res.status(400).send({message:"Username already taken"})
+    res.status(400).send({message:"Username already taken",signup:false})
     return
   }
 
 
   db.run(
-    `INSERT INTO USERS (user_id , username , user_password , firstname , surname) VALUES(?,?,?,?,?)`,
+    `INSERT INTO USERS (user_id , username , user_password , firstname , surname)
+     VALUES(?,?,?,?,?)`,
     [user_id, username, md5(user_password), firstname, surname],
     (err, result) => {
       if (err) {
@@ -53,7 +67,7 @@ router.post("/signup", jsonParser, async (req, res) => {
         });
       } else {
         res.status(201).send({
-          message: "User created"
+          message: "User created",signup:true
         });
       }
     }
@@ -74,7 +88,9 @@ router.post("/login", jsonParser, async (req, res) => {
   });
 
   if (user.length == 0) {
-    res.status(400).send({ message: "Username not found" });
+    res.status(400).send({ 
+      logged:false,
+      message: "Username not found" });
     return;
   }
 
@@ -93,7 +109,9 @@ router.post("/login", jsonParser, async (req, res) => {
 
   //*send answer if password is incorrect
   if (autheticate_user == 0) {
-    res.status(400).send({ message: "Please check your password" });
+    res.status(400).send({
+      logged:false,
+      message: "Please check your password" });
     return;
   }
 
@@ -102,11 +120,11 @@ router.post("/login", jsonParser, async (req, res) => {
       req.session.username = autheticate_user[0].username;
       req.session.firstname = autheticate_user[0].firstname;
       req.session.surname = autheticate_user[0].surname;
-    
-      res.status(200);
-      res.send({
-        message:"Login"
-      })
+
+
+
+      res.status(200)
+      .send({logged:true});
 
 
 });
@@ -130,5 +148,28 @@ router.get("/users", async (req, res) => {
   else
     res.status(200).send({users: users });
 });
+
+router.get("/user",requireLogin, async(req , res)=>{
+
+  res.status(200).send({
+
+    username:req.session.username,
+    user_id:req.session.user_id,
+    firstname:req.session.firstname,
+    surname:req.session.surname
+  })
+})
+
+
+router.post('/signout' , requireLogin , async(req , res)=>{
+    req.session.destroy()
+    
+    res.send({
+      signout:true
+    })
+
+
+})
+
 
 export default router;

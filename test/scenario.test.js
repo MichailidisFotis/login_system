@@ -1,8 +1,12 @@
 import request from 'supertest'
 import makeApp from "../index.js"
 
+import requireLogin from '../middlewares/requireLogin.js'
+import {jest} from '@jest/globals'
 
 const app = makeApp
+
+
 
 const data={
     firstname:"testingFirstname",
@@ -17,6 +21,13 @@ const login_data = {
     password : "1234"
 }
 
+test("Get logged in user is not completed when no one is logged in" , async()=>{
+    var response  = await request(app)
+    .get("/users/user")
+    
+    expect(response.body.message).toBe("Unauthorized")
+    expect(response.status).toBe(401)
+})
 
 test("Registration is done correctly",async()=>{
     var response =  await request(app)
@@ -27,14 +38,6 @@ test("Registration is done correctly",async()=>{
       expect(response.status).toBe(201)
   })
 
-test("Login is done correctly" , async()=>{
-    var response = await request(app)
-    .post("/users/login")
-    .send(login_data)
-
-    expect(response.status).toBe(200)
-
-})
 
 
 test("Registrarion is not completed if passwords don't match" , async()=>{
@@ -88,6 +91,8 @@ test("Login is not completed if the inserted username is not found" , async()=>{
 
 })
 
+
+
 test("Login is not completed if password is incorrect" , async()=>{
     var response  = await request(app)
     .post("/users/login")
@@ -102,3 +107,13 @@ test("Login is not completed if password is incorrect" , async()=>{
     expect(response.status).toBe(400)
 
 })
+
+test("Login is done correctly" , async()=>{
+    var response = await request(app)
+    .post("/users/login")
+    .send(login_data)
+
+    expect(response.status).toBe(200)
+
+})
+
