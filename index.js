@@ -33,7 +33,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/users' ,usersRouter)
 
-app.get('/index' , async(req , res)=>{
+app.get('/' , async(req , res)=>{
 
 	res.sendFile(__dirname+'/index.html')
 })
