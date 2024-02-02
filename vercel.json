@@ -8,7 +8,12 @@
         }
     ],
     "routes":[{
+        
         "src":"/(.*)",
         "dest":"/server.js"
-    }]
+    },
+    { "src": "/signup", "dest": "/signup.html" },
+    { "src": "/signup", "dest": "/signup.html" },
+    { "src": "/user_page", "dest": "/user_page.html" }
+    ]
 }
