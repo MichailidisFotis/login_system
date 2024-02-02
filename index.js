@@ -43,6 +43,10 @@ app.get('/user_page' , requireLogin , async(req , res)=>{
 })
 
 
+app.get('/signup' , async(req , res) =>{
+  res.sendFile(__dirname+"/signup.html")
+})
+
 
 
 export default app;
