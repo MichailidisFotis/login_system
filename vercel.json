@@ -6,13 +6,8 @@
             "use":"@vercel/node"
 
         }
-    ],
-    "routes":[
-        {
-            "src":"/users",
-            "dest":"/users"
-        }
     ]
+
 
 
 }
