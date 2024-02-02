@@ -29,9 +29,7 @@ app.use(express.static(__dirname))
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/' ,  (req , res) =>{
-  res.send("Hi")
-})
+
 
 app.use('/users' ,usersRouter)
 
