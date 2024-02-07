@@ -34,7 +34,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/users' ,usersRouter)
 
 app.use('/' , async (req , res)=>{
-  res.sendFile(__dirname+"/index.html")
+  res.redirect(__dirname+"/index.html")
 })
 
 app.get('/user_page' , requireLogin , async(req , res)=>{
