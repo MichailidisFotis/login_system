@@ -2,7 +2,7 @@
   "name": "login_system",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "type": "module",
   "engines": {
     "node": "18.x"
