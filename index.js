@@ -40,7 +40,10 @@ app.get('/user_page' , requireLogin , async(req , res)=>{
 })
 
 
+const PORT =5000;
 
+
+app.listen(PORT,()=>console.log('Listening to port :'+PORT))
 
 
 
